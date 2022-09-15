@@ -9,7 +9,7 @@
   - [http://localhost:4000/comments](http://localhost:4000/comments)에 `GET` 요청시 `data.json` 파일에 기록된 데이터 확인 가능
   - API 를 통해 입력하거나 수정하면 data.json 파일내용도 변경됨
   - 총 댓글수는 `/comments` API로 호출 후 응답값을 통해서 직접 계산.
-  - 서버는 json-server 라이브러리 이용해서 구축됭
+  - 서버는 json-server 라이브러리 이용해서 구축됨
   
     - API 사용법에 대한 추가정보는 공식문서 참고: [https://www.npmjs.com/package/json-server](https://www.npmjs.com/package/json-server)
     

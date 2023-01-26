@@ -1,0 +1,40 @@
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { pageNumber } from '../redux/Page'
+import { Tcomments } from '../util/types/types'
+export const commentsApi = createApi({
+  reducerPath: 'commentsApi',
+  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:4000/' }),
+  tagTypes: ['commentPage', 'User'],
+
+  endpoints: (builder) => ({
+    getCommentById: builder.query({
+      query: (commentId : number) => ({url:`comments/${commentId}`}),
+    }),
+    getCommentByPage: builder.query({
+      query: (id =1) => ({url:`comments?_page=${id.pageNumber}&_limit=4&_order=desc&_sort=id`}),
+      transformResponse(apiResponse: Array<Tcomments>, meta : any)  {
+        return { apiResponse , totalComment : meta.response.headers.get('X-Total-Count')}
+      },
+      providesTags: ['commentPage'],
+    }),
+    updateComment: builder.mutation({
+      query: ({id, newComment}) => {
+       return {
+        url:`comments/${id}`,
+        method: 'PUT',
+        body:newComment
+      }},
+      invalidatesTags: ['commentPage'],
+    }),
+    deleteComment: builder.mutation({
+      query: ({id}) => {
+        console.log(id)
+       return {
+        url:`comments/${id}`,
+        method: 'DELETE',
+      }},
+      invalidatesTags: ['commentPage'],
+    })
+  }),
+})
+export const { useGetCommentByIdQuery,useGetCommentByPageQuery,useUpdateCommentMutation,useDeleteCommentMutation} = commentsApi

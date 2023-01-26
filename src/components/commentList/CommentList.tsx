@@ -6,47 +6,41 @@ import { useState } from "react";
 import View from "./View";
 import Confirmation from "../../modal/confirmation";
 import Form from "../form/Form";
-import { comment } from "../../redux/comment";
 
-interface IParam {
-  ev: React.MouseEvent;
-  commentId: number;
-  mode: '수정' | '삭제'
-
+interface IModal {
+  ev ?: React.MouseEvent;
+  mode : '수정' | '삭제';
+  commentId : Tcomments["id"];
 }
 
-interface IModalComment {
-  mode: '수정' | '삭제' | null,
-  commentId: number
-}
 const CommentList = (): any => {
   const pageNumber = useSelector((state: any) => state.pageNumber);
   const { data } = useGetCommentByPageQuery(pageNumber);
-  const { open, close, PortalModal } = useModal();
-  const [modalComment, setModalComment] = useState<any>({ mode: null, comment: null })
-  
+  const [modal, setModal] = useState<IModal>({mode: null,commentId: null})
+  const { open,PortalModal } = useModal();
+
   if (!data) return <>someThing wrong</>;
   const comments = data.apiResponse.filter((comment) => comment.title !== 'pending');
+  const modalComment : Tcomments = comments.filter((el)=> el.id === modal.commentId)[0];
 
   const Vprops = {
-    ModalTrigger: ({ ev, commentId, mode }: IParam) => {
-      setModalComment({
+    ModalTrigger: ({ ev, commentId, mode }: IModal) => {
+      setModal({
         mode: mode,
         commentId: commentId,
       });
       open(ev);
     },
     PortalModal: PortalModal,
-    mode: modalComment.mode,
+    mode: modal.mode,
   }
-  const modalComment1 :any= comments.filter((el)=> el.id === modalComment.commentId)[0];
 
   return (
     <>
       {comments.map((comment) =>
         <View key={comment.id} {...Vprops} comment={comment} />)}
       <PortalModal>
-        {modalComment.mode === '수정' ? <Form comment={modalComment1} /> : <Confirmation />}
+        {modal.mode === '수정' ? <Form comment={modalComment} /> : <Confirmation />}
       </PortalModal>
     </>
   )

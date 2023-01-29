@@ -1,14 +1,13 @@
-import { MouseEvent } from "react";
+import { useModal } from "../../util/hooks/useModal";
 import styled from "styled-components";
-
-
+import React from "react";
 interface IButton {
   textAlign: string;
 }
 
 interface IProps {
-  onClose?: Function;
-  event?: Function
+  deleteCommentHandler: Function;
+  close : Function;
 }
 const Button = styled.div<IButton>`
 text-align: ${props => props.textAlign};
@@ -33,22 +32,13 @@ const MessageBox = styled.div`
 
 `
 
-const Confirmation = ({ onClose, event }: IProps ) => {  
-  
-  const cancelHandler = () => {
-    onClose();
-  }
-  
-  const confirmHandler = event === undefined ? 
-  () => {onClose()} : 
-  () => {event(); onClose()}
-
+const Confirmation = ({deleteCommentHandler,close}) => {  
   return (
-    <MessageBox>
+    <MessageBox > 
       <Message>삭제하시겠습니까?</Message>
       <Button textAlign={'center'} >
-        <a onClick={confirmHandler}>네</a>
-        <a onClick={cancelHandler}>아니오</a>
+        <a onClick={(e) => {deleteCommentHandler(e)}}>네</a>
+        <a onClick={close}>아니오</a>
       </Button >
     </MessageBox>)
 }

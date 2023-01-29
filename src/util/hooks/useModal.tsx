@@ -4,22 +4,21 @@ import PortalModal from "../../modal/PortalModal";
 
 
 export const useModal = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(null);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  
   const open = useCallback((e:React.MouseEvent): void => {
-    if ((e.target === e.currentTarget)) {
-      setIsOpen(true);
-    }
+    setIsOpen(true);
   }, []);
 
-  const close = useCallback((e : MouseEvent): void => {
-    if ((e.target === e.currentTarget)) {
-      setIsOpen(false);
-    }
+  const close = useCallback((e : React.MouseEvent): void => {
+    if(e.target===e.currentTarget){
+    setIsOpen(false)
+  } 
   }, []);
 
   return {
     PortalModal: isOpen ? ({ children }) => (
-      <PortalModal onClose={(e)=>close(e)}>{children}</PortalModal>
+      <PortalModal onClose={close}>{children}</PortalModal>
     ) : () => null,
     open,
     close,

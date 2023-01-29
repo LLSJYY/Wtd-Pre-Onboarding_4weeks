@@ -28,7 +28,6 @@ export const commentsApi = createApi({
     }),
     deleteComment: builder.mutation({
       query: ({id}) => {
-        console.log(id)
        return {
         url:`comments/${id}`,
         method: 'DELETE',

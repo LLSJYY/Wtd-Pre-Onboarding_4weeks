@@ -40,9 +40,9 @@ const PortalModal = ({onClose, children}:Tprops)=> {
   return createPortal(
     <>
       <ModalWrapStyle
-        onClick={onClose}
+        onClick={(e)=> onClose(e)}
       >
-        <ModalStyle>
+        <ModalStyle > 
             {children}
         </ModalStyle>
       </ModalWrapStyle>

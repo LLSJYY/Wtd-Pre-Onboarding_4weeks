@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Tcomments } from "../../util/types/types";
 
 interface IButton {
   textAlign: string;
@@ -38,16 +39,20 @@ margin: 10px 0;
   }
 `;
 
-const View = ({ ...Vprops }: any) => {
-  const { comment, ModalTrigger, PortalModal, mode } = Vprops;
+interface IProps {
+  comment : Tcomments,
+  modalTrigger : Function
+}
+const View = ({ ...Vprops } : IProps) => {
+  const { comment, modalTrigger } = Vprops;
  return <>
     <Comment key={comment.id}>
       <img src={comment.profile_url} alt="" />{comment.author}
       <CreatedAt>{comment.createdAt}</CreatedAt>
       <Content>{comment.content}</Content>
       <Button textAlign={'right'} >
-        <button onClick={(ev) => ModalTrigger({ ev, commentId: comment.id, mode: '수정' })}>수정</button>
-        <button onClick={(ev) => ModalTrigger({ ev, commentId: comment.id, mode: '삭제' })}>삭제</button>
+        <button onClick={(event) => modalTrigger({ event, commentId: comment.id, mode: '수정' })}>수정</button>
+        <button onClick={(event) => modalTrigger({ event, commentId: comment.id, mode: '삭제' })}>삭제</button>
       </Button>
       <hr />
     </Comment>

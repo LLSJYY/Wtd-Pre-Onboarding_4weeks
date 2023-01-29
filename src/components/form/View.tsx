@@ -29,7 +29,6 @@ const FormStyle = styled.div`
 
 const View = ({ ...Vprops }) => {
   const { comment, onSubmit, ViewRef, onChange } = Vprops;
-  console.log(comment,'view')
   return (
     <>
       <FormStyle key={comment.id}>

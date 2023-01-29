@@ -1,7 +1,5 @@
 import View from "./View";
 import { Tcomments } from "../../util/types/types";
-import { useUpdateCommentMutation } from "../../Api";
-import { HtmlHTMLAttributes } from "react";
 import { useRef } from "react";
 interface IVprops {
   onChange: (e :  React.ChangeEvent<HTMLInputElement>, ref : any) => void;
@@ -10,16 +8,8 @@ interface IVprops {
   ViewRef : any
 }
 
-interface IProps {
-  comment: Tcomments
-} // 이거 안해주면 왜 any라고 뜰까 ?
-const Form = ({ comment }: IProps) => {
+const Form = ({ comment,updateCommentHandler } ) => {
   let newComment = null;
-  const [
-    updateComment, // This is the mutation trigger
-    { isLoading: isUpdating }, // This is the destructured mutation result
-  ] = useUpdateCommentMutation();
-  console.log(comment);
   const ViewRef = useRef<any>({
     profile_url : '',
     author : '', 
@@ -28,7 +18,7 @@ const Form = ({ comment }: IProps) => {
   })
   
   const Vprops: IVprops = {
-    onChange: (e,ref) => {  ref.value = e.target.value; console.log(ViewRef.current.profile_url.value);},
+    onChange: (e,ref) => {ref.value = e.target.value;},
     onSubmit: (e,ViewRef) => {
       e.preventDefault();
        newComment = {
@@ -37,12 +27,15 @@ const Form = ({ comment }: IProps) => {
         content : ViewRef.current.content.value,
         createdAt : ViewRef.current.createdAt.value
       }
-      updateComment({ id: comment.id, newComment: newComment })
+      updateCommentHandler({
+        newComment: newComment,
+        e,
+      })
     },
     comment: comment,
     ViewRef : ViewRef,
   }
-  return (<View {...Vprops} />)
+  return (<View {...Vprops}   />)
 }
 
 export default Form;

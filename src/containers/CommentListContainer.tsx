@@ -1,8 +1,12 @@
-import React from "react";
-import CommentList from "../components/commentList/View";
+export default {};
+// import React from "react";
+// import CommentList from "../components/commentList/View";
+// interface IProps {
+//   comment : any,
+//   modalTrigger : Function
+// }
+// const  CommentListContainer = ()   => {
+//   return <CommentList />;
+// } 
 
-const  CommentListContainer = () : any =>{
-  return <CommentList />;
-}
-
-export default CommentListContainer;
+// export default CommentListContainer;

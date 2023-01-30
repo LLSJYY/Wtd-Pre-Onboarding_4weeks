@@ -18,7 +18,7 @@ const Form = ({ comment,updateCommentHandler } ) => {
   })
   
   const Vprops: IVprops = {
-    onChange: (e,ref) => {ref.value = e.target.value;},
+    onChange: (e,ref) => {  ref.value = e.target.value;},
     onSubmit: (e,ViewRef) => {
       e.preventDefault();
        newComment = {

@@ -14,7 +14,7 @@ interface IModal {
 }
 
 const CommentList = () => {
-  const pageNumber = useSelector((state: any) => state.pageNumber);
+  const pageNumber = useSelector((state: any) => state.pageNumberSlice);
   const { data } = useGetCommentByPageQuery(pageNumber);
   const { open, PortalModal,close } = useModal();
   const [deleteComment] = useDeleteCommentMutation();
@@ -23,6 +23,7 @@ const CommentList = () => {
     mode: null,
     commentId: null
   })
+  
   if (!data) return <>someThing wrong</>;
 
   const sortedComments = data.apiResponse.filter((comment) => comment.title !== 'pending');

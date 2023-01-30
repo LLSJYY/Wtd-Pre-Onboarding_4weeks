@@ -1,12 +1,12 @@
 import React from "react";
-import PageListContainer from "./containers/PageListContainer";
 import CommentList from "./components/commentList/CommentList";
+import PageList from "./components/pageList/PageList";
 
 function App() {
   return (
     <div>
       <CommentList/>
-      <PageListContainer/>
+      <PageList/>
     </div>
   );
 }

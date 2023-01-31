@@ -1,6 +1,7 @@
 import React from "react";
 import styled from 'styled-components';
-
+import PageList from "./PageList";
+import { useState } from "react";
 const PageListStyle = styled.div`
   margin-bottom: 20px;
   text-align: center;
@@ -15,23 +16,18 @@ const Page = styled.button`
   margin-right: 3px;
 `;
 
-const View  = ({...Vprops}) =>  {
-  const {pageLength,pageClickHandler} = Vprops;
-  const pageArray = [];
-  
-  for(let i = 0; i < pageLength; i++) {
-    pageArray.push(i+1);
-  } 
-  
+const View = ({ ...Vprops }) => {
+  const {  pageClickHandler, pagination } = Vprops;
+  console.log(pagination);
   return (
     <PageListStyle>
       {
-        pageArray.map((pageNumber) =>
-          <Page 
-          key={pageNumber}
-          onClick={()=> pageClickHandler(pageNumber)}>
+        pagination.map((pageNumber, index) =>
+          <Page
+            key={pageNumber}
+            onClick={() => pageClickHandler(pageNumber)}>
             {pageNumber}
-            </Page>)
+          </Page>)
       }
     </PageListStyle>
   )

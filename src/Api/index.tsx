@@ -11,7 +11,7 @@ export const commentsApi = createApi({
       query: (commentId : number) => ({url:`comments/${commentId}`}),
     }),
     getCommentByPage: builder.query({
-      query: (id =1) => ({url:`comments?_page=${id.pageNumber}&_limit=4&_order=desc&_sort=id`}),
+      query: (pageNumber =1) => ({url:`comments?_page=${pageNumber}&_limit=4&_order=desc&_sort=id`}),
       transformResponse(apiResponse: Array<Tcomments>, meta : any)  {
         return { apiResponse , totalComment : meta.response.headers.get('X-Total-Count')}
       },

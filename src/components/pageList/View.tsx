@@ -1,29 +1,31 @@
-import React from "react";
 import styled from 'styled-components';
-import PageList from "./PageList";
-import { useState } from "react";
 const PageListStyle = styled.div`
   margin-bottom: 20px;
   text-align: center;
 `;
 
-const Page = styled.button`
+const Page = styled.button<IPage>`
   padding: 0.375rem 0.75rem;
   border-radius: 0.25rem;
   font-size: 1rem;
   line-height: 1.5;
-  border: 1px solid lightgray;
+  border: ${props => props._currentPage}
   margin-right: 3px;
 `;
 
+interface IPage {
+  readonly _currentPage: string;
+}
+
 const View = ({ ...Vprops }) => {
-  const {  pageClickHandler, pagination } = Vprops;
-  console.log(pagination);
+  const {  pageClickHandler, pagination,currentPage } = Vprops;
+  
   return (
     <PageListStyle>
       {
         pagination.map((pageNumber, index) =>
           <Page
+            _currentPage={pageNumber === currentPage ? 'none' : '1px solid lightgray;'}
             key={pageNumber}
             onClick={() => pageClickHandler(pageNumber)}>
             {pageNumber}

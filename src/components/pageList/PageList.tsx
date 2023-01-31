@@ -38,6 +38,7 @@ const PageList = () => {
     const Vprops = {
       pageClickHandler: (number) => { dispatch(selectedPageNumber(number)) },
       pagination,
+      currentPage,
     }
 
     return <View {...Vprops} />;

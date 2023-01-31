@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { pageNumber } from '../redux/Page'
 import { Tcomments } from '../util/types/types'
 export const commentsApi = createApi({
   reducerPath: 'commentsApi',

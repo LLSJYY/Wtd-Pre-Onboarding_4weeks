@@ -14,7 +14,7 @@ interface IModal {
 }
 
 const CommentList = () => {
-  const pageNumber = useSelector((state: any) => state.pageNumberSlice);
+  const { pageNumber } = useSelector((state: any) => state.pageNumberSlice);
   const { data } = useGetCommentByPageQuery(pageNumber);
   const { open, PortalModal,close } = useModal();
   const [deleteComment] = useDeleteCommentMutation();

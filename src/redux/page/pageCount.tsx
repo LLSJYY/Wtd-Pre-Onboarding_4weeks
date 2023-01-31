@@ -10,9 +10,6 @@ export const pageNumberSlice = createSlice({
   reducers: {
     selectedPageNumber (state,action){
       state.pageNumber = action.payload;
-    },
-    pageArray (state,action) {
-
     }
   }
 });

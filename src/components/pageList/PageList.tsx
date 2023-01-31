@@ -5,7 +5,8 @@ import { selectedPageNumber } from "../../redux/page/pageCount";
 
 const PageList = () => {
   const { pageNumber } = useSelector((state: any) => state.pageNumberSlice);
-  const { data, isLoading, isError } = useGetCommentByPageQuery({ pageNumber });
+  console.log(pageNumber);
+  const { data, isLoading, isError } = useGetCommentByPageQuery(pageNumber);
   const dispatch = useDispatch();
   const currentPage = pageNumber;
   if (isLoading) {
@@ -34,7 +35,6 @@ const PageList = () => {
     } else {
       pagination = totalPage.slice(currentPage - (Math.ceil(pageGroup / 2)), currentPage + ((Math.floor(pageGroup / 2))));
     }
-
     const Vprops = {
       pageClickHandler: (number) => { dispatch(selectedPageNumber(number)) },
       pagination,

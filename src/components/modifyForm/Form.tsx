@@ -20,7 +20,6 @@ const Form = ({ comment,updateCommentHandler } ) => {
   const Vprops: IVprops = {
     onChange: (e,ref) => {  ref.value = e.target.value;},
     onSubmit: (e,ViewRef) => {
-      e.preventDefault();
        newComment = {
         profile_url : ViewRef.current.profile_url.value,
         author : ViewRef.current.author.value,

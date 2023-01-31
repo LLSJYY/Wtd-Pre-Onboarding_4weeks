@@ -1,5 +1,6 @@
 import React from "react";
 import CommentList from "./components/commentList/CommentList";
+import NewForm from "./components/newForm/NewForm";
 import PageList from "./components/pageList/PageList";
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
     <div>
       <CommentList/>
       <PageList/>
+      <NewForm/>
     </div>
   );
 }

@@ -5,7 +5,7 @@ import { Tcomments } from "../../util/types/types"
 import { useState } from "react";
 import View from "./View";
 import Confirmation from "../../modal/confirmation";
-import Form from "../form/Form";
+import Form from "../modifyForm/Form";
 import { useDeleteCommentMutation ,useUpdateCommentMutation} from "../../Api";
 interface IModal {
   event?: React.MouseEvent;

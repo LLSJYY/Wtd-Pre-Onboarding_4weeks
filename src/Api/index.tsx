@@ -16,6 +16,15 @@ export const commentsApi = createApi({
       },
       providesTags: ['commentPage'],
     }),
+    addComment: builder.mutation({
+      query: ({newComment}) => {
+       return {
+        url:`comments/`,
+        method: 'POST',
+        body:newComment
+      }},
+      invalidatesTags: ['commentPage'],
+    }),
     updateComment: builder.mutation({
       query: ({id, newComment}) => {
        return {
@@ -35,4 +44,4 @@ export const commentsApi = createApi({
     })
   }),
 })
-export const { useGetCommentByIdQuery,useGetCommentByPageQuery,useUpdateCommentMutation,useDeleteCommentMutation} = commentsApi
+export const { useGetCommentByIdQuery,useGetCommentByPageQuery,useUpdateCommentMutation,useDeleteCommentMutation,useAddCommentMutation} = commentsApi

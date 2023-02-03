@@ -13,8 +13,7 @@
 ## 사용기술
 
 ### ReactJS with VAC PATTERN
-<details>
-<summary>사용 이유</summary>
+
   
 ```
   1.View 로직(UI 기능, 상태 관리)과 렌더링(JSX)의 관심사 분리를 해보고싶어서 적용해봤습니다.
@@ -23,32 +22,23 @@
   2.VAC debugger의 도움을 받아 보다 쉬운 설계를 할 수 있습니다.
   
 ```
-</details>
 
 ### ReactJS with styled-Component
 
-<details>
-<summary>사용 이유</summary>
 
 ```
   디자인..감각이 그렇게 좋지않아서 자주 CSS를 바꿨어야 했는데,VAC 패턴 적용으로 어느 컴포넌트에서
   스타일을 바꿔야할지 바로 알 수 있어 용이했습니다.
 ```
-</details>
 
 ### ReactJS with Redux Toolkit
-<details>
-<summary>사용 이유</summary>
   
 ```
   1. 필수 기술중, Redux-Devtools,Redux-Logger의 적용을 보다 편리하게 할수 있었습니다.
   2. RTK QUERY를 사용할 수 있습니다.
 ```
-</details>
 
 ### Redux Toolkit with RTK Query
-<details>
-<summary>사용 이유</summary>
 
 ```
   1. 서버 상태와 프론트 상태를 분리해서 관리할 수 있기 때문에 다양한 방식을 적용할 수 있었습니다.
@@ -57,19 +47,14 @@
       
   2.Query가 제공하는 isLoading, isError등을 이용하여 통신 관련 상태 관리를 할 수 있었습니다.
 ```
-</details>
 
 ### TypeScriptt
-<details>
-<summary>사용 이유</summary>
 
 ```
   1.런타임 단계가 아닌, 컴파일 단계에서 오류 확인이 가능하기 때문에 사용했습니다.
   2.Type Restriction을 두어서 발생할 수 있는 Human Error를 사전에 방치 할 수 있습니다.
 ```
   
-</details>
-
 ## 구조
 ```
 src

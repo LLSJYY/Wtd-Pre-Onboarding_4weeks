@@ -18,6 +18,7 @@ export const commentsApi = createApi({
     }),
     addComment: builder.mutation({
       query: ({newComment}) => {
+        debugger;
        return {
         url:`comments/`,
         method: 'POST',

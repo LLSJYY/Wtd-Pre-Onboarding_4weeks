@@ -5,7 +5,6 @@ import { selectedPageNumber } from "../../redux/page/pageCount";
 
 const PageList = () => {
   const { pageNumber } = useSelector((state: any) => state.pageNumberSlice);
-  console.log(pageNumber);
   const { data, isLoading, isError } = useGetCommentByPageQuery(pageNumber);
   const dispatch = useDispatch();
   const currentPage = pageNumber;

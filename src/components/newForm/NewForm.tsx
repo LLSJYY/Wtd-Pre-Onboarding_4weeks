@@ -4,27 +4,27 @@ import { useAddCommentMutation } from "../../Api";
 import { useDispatch } from "react-redux";
 import { selectedPageNumber } from "../../redux/page/pageCount";
 interface IVprops {
-  onChange : Function;
-  onSubmit : Function;
-  ViewRef : any;
+  onChange: Function;
+  onSubmit: Function;
+  ViewRef: any;
 }
 const NewForm = () => {
   const dispatch = useDispatch();
   let newComment = null; //해결하고싶습니다.
   const [addComment] = useAddCommentMutation();
-  
+
   const ViewRef = useRef<any>({
     profile_url: '',
     author: '',
     content: '',
     createdAt: ''
   })
-  const addCommentHandler = ({newComment}) => {
-    addComment({newComment})
+  const addCommentHandler = ({ newComment }) => {
+    addComment({ newComment })
     dispatch(selectedPageNumber(1))
   }
-  const Vprops : IVprops = {
-    onChange: (e, ref) => { ref.value = e.target.value; },
+  const Vprops: IVprops = {
+    onChange: (e, ref) => {ref.value = e.target.value; },
     onSubmit: (e, ViewRef) => {
       e.preventDefault();
       newComment = {

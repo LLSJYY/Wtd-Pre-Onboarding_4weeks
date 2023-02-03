@@ -1,56 +1,121 @@
-## 목표
-
-- API 서버와 통신해서 작동하는 댓글 프로젝트를 Redux를 통해 구현
-
-## 참고자료
-
-- API 참고사항
-  - 프로젝트내에서 `npm install` 후, `npm run api` 실행 시 `[localhost:4000](http://localhost:4000)` 에 API 서버 실행
-  - [http://localhost:4000/comments](http://localhost:4000/comments)에 `GET` 요청시 `data.json` 파일에 기록된 데이터 확인 가능
-  - API 를 통해 입력하거나 수정하면 data.json 파일내용도 변경됨
-  - 총 댓글수는 `/comments` API로 호출 후 응답값을 통해서 직접 계산.
-  - 서버는 json-server 라이브러리 이용해서 구축됨
-  
-    - API 사용법에 대한 추가정보는 공식문서 참고: [https://www.npmjs.com/package/json-server](https://www.npmjs.com/package/json-server)
-    
-      | method | url |
-      | ------ | --------------------- |
-      | GET | /comments |
-      | GET | /comments/{commentId} |
-      | POST | /comments |
-      | PUT | /comments/{commentId} |
-      | DELETE | /comments/{commentId} |
-      
-  - API 호출 예시:
-    - 한페이지에 4개의 게시물이 보이고, 최근 게시물부터 정렬해서 3페이지를 보고 싶은 경우
-    - GET `/comments?_page=3&_limit=4&_order=desc&_sort=id`
-
-## 과제 범위
-
-1. 예시 이미지와 같이 댓글 불러오기, 작성, 수정, 삭제가 동작하도록 기능 구현
-
-     ![https://user-images.githubusercontent.com/12206933/83601436-8e15b780-a5ab-11ea-91ad-04a302579c90.gif](https://user-images.githubusercontent.com/12206933/83601436-8e15b780-a5ab-11ea-91ad-04a302579c90.gif)
-     
-2. 페이지네이션
-3. 댓글 작성, 수정, 삭제 후 동작
+## 구현 사항 
+  1. API 서버와 통신해서 작동하는 댓글 프로젝트를 Redux를 통해 구현
+  2. 페이지네이션
+  3. 댓글 작성, 수정, 삭제 후 동작
    - 댓글 작성하고 난 뒤: 다른 페이지에 위치하고 있었더라도 1페이지로 이동, 입력 폼 초기화
    - 댓글 수정하고 난 뒤: 현재 보고있는 페이지 유지, 입력 폼 초기화
    - 삭제하고 난 뒤: 1페이지로 이동
 
-## 요구 사항
+  예시 이미지와 같이 댓글 불러오기, 작성, 수정, 삭제가 동작하도록 기능 구현
+     ![https://user-images.githubusercontent.com/12206933/83601436-8e15b780-a5ab-11ea-91ad-04a302579c90.gif](https://user-images.githubusercontent.com/12206933/83601436-8e15b780-a5ab-11ea-91ad-04a302579c90.gif)
+     
+## 사용기술
 
-- Redux 환경설정은 자유롭게 진행
-  - Redux-saga or Redux-thunk 자유롭게 선택 가능
-  - 미들웨어 사용안하는 것도 가능
-- Redux logger, Redux-Devtools 설정 필수
-- Redux를 이용한 비동기 처리 필수
+### ReactJS with VAC PATTERN
+<details>
+<summary>사용 이유</summary>
+  
+```
+  1.View 로직(UI 기능, 상태 관리)과 렌더링(JSX)의 관심사 분리를 해보고싶어서 적용해봤습니다.
+   - View componnent는 오직 props를 통해서만 제어되며 스스로의 상태를 관리하거나 변경하지 않는 stateless 컴포넌트입니다.
+   - 반복이나 조건부 노출, 스타일 제어와 같은 렌더링과 관련된 처리만을 수행합니다. 
+  2.VAC debugger의 도움을 받아 보다 쉬운 설계를 할 수 있습니다.
+  
+```
+</details>
 
-## 개발 조건 및 환경
+### ReactJS with styled-Component
 
-- 언어 : JavaScript / TypeScript
-- 필수 기술: React, Redux, Redux-Logger, Redux-Devtools
-- 선택 기술:
-  - Redux Middleware
-  - 스타일 관련 라이브러리(styled-components, emotion, ui kit 등)
-  - HTTP Client(axios 등)
-- 위에 기재된 라이브러리 외 사용 불가
+<details>
+<summary>사용 이유</summary>
+
+```
+  디자인..감각이 그렇게 좋지않아서 자주 CSS를 바꿨어야 했는데,VAC 패턴 적용으로 어느 컴포넌트에서
+  스타일을 바꿔야할지 바로 알 수 있어 용이했습니다.
+```
+</details>
+
+### ReactJS with Redux Toolkit
+<details>
+<summary>사용 이유</summary>
+  
+```
+  1. 필수 기술중, Redux-Devtools,Redux-Logger의 적용을 보다 편리하게 할수 있었습니다.
+  2. RTK QUERY를 사용할 수 있습니다.
+```
+</details>
+
+### Redux Toolkit with RTK Query
+<details>
+<summary>사용 이유</summary>
+
+```
+  1. 서버 상태와 프론트 상태를 분리해서 관리할 수 있기 때문에 다양한 방식을 적용할 수 있었습니다.
+     comment를 수정할때, 수정이 다 완료가 된 후 onSubmit이벤트를 통해 서버로 보내거나
+     onChange 이벤트를 이용해 keyboard Event가 일어날 때 마다 서버에 데이터를 보내는 두가지 방식을 적용해보았습니다.
+      
+  2.Query가 제공하는 isLoading, isError등을 이용하여 통신 관련 상태 관리를 할 수 있었습니다.
+```
+</details>
+
+### TypeScriptt
+<details>
+<summary>사용 이유</summary>
+
+```
+  1.런타임 단계가 아닌, 컴파일 단계에서 오류 확인이 가능하기 때문에 사용했습니다.
+  2.Type Restriction을 두어서 발생할 수 있는 Human Error를 사전에 방치 할 수 있습니다.
+```
+  
+</details>
+
+## 구조
+```
+src
+├── Api
+│   └── index.tsx
+├── App.tsx
+├── components
+│   ├── commentList
+│   ├── modifyForm
+│   ├── newForm
+│   └── pageList
+├── index.tsx
+├── modal
+│   ├── PortalModal.tsx
+│   └── confirmation
+├── redux
+│   ├── page
+│   └── store.tsx
+└── util
+    ├── hooks
+    └── types
+```
+
+  ## 프로젝트 진행시 주안점
+  - devTools 충분히 사용해보기
+    Redux Devtools 와 VAC Debugger를 이용한 개발 경험을 해보기 위해 노력했습니다.
+  
+  - 라이브러리의 작동원리와 관심사 분리
+    처음 사용하는 라이브러리다 보니 안티패턴을 사용할 수 있기 때문에 해당라이브러리에 대한 Docs나 내부구조를 많이 공부하며
+    찾아 보았습니다. 관심사 분리를 위해 어떤 함수가 어떤 역할을 하는지 정확히 알아야할 필요가 있었습니다.
+    
+  - 재사용 가능한 포탈 모달 컴포넌트 
+    해당 프로젝트에서 모달을 포탈기능을 활용하고, 또 재사용 가능하게 커스텀 훅으로 작성했습니다.
+    
+  
+  ## 프로젝트 하면서 느낀 한계점
+   - Git 활용도 부족
+     부족한 커밋 관리로 인해, 오류를 해결 했지만 이후 회고록을 작성할떄
+     오류 해결을 위해 어떻게 접근했고, 어떤식으로 해결 했고 등등의 방식이 기억이 나질 않아 깃 관리
+     의 중요성을 깨달았습니다.
+   
+   - Typescript any 
+      무분별한 any Type 남용은 안티패턴입니다
+      
+   - 중복된 Modal 로직
+     NewForm 과 ModifyForm의 로직이 공통된 사항이 많은데, modify Form의 특정 관심사를 따로 빼낼 수가 없었습니다.  
+     조금 더 고민을 해본다면 , 더 좋은 구조를 만들 수 있을것 같습니다.
+     
+   - query 의 isLoading , isError 등의 비동기 관련 기능과 캐싱기능
+     해당 기능에 대한 충분한 숙지가 되지 않아서 사용하지 못했는데, 아쉬웠습니다.

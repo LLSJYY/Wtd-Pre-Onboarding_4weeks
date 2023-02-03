@@ -9,6 +9,7 @@
   예시 이미지와 같이 댓글 불러오기, 작성, 수정, 삭제가 동작하도록 기능 구현
      ![https://user-images.githubusercontent.com/12206933/83601436-8e15b780-a5ab-11ea-91ad-04a302579c90.gif](https://user-images.githubusercontent.com/12206933/83601436-8e15b780-a5ab-11ea-91ad-04a302579c90.gif)
      
+
 ## 사용기술
 
 ### ReactJS with VAC PATTERN
@@ -119,3 +120,7 @@ src
      
    - query 의 isLoading , isError 등의 비동기 관련 기능과 캐싱기능
      해당 기능에 대한 충분한 숙지가 되지 않아서 사용하지 못했는데, 아쉬웠습니다.
+     
+     
+   ### 과제 NOTION
+   https://www.notion.so/WTD-4-978a7f1be0314cc28997b576635e5bc5

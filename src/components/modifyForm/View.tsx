@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, { MutableRefObject, useRef } from "react";
+import React, { useRef } from "react";
 const FormStyle = styled.div`
   width: 100%;
   height: 100%;
@@ -27,20 +27,27 @@ const FormStyle = styled.div`
 
 const View = ({ ...Vprops }) => {
   const inputRefs = useRef([]);
+  const formRef = useRef<HTMLFormElement>(null);
+  console.log(formRef.current);
   const { comment, onSubmit } = Vprops;
   const inputNames = ["profile_url", "author", "content", "createdAt"];
   const onSubmitHandler = (e: React.FormEvent) => {
     e.preventDefault();
-    const form = inputRefs.current.reduce((acc, curr, index) => {
-      acc[curr.name] = curr.value;
-      return acc;
-    }, {});
-    onSubmit(e, form);
+    const form = new FormData(formRef.current);
+    let formData = Object.fromEntries(form);
+    onSubmit(e, formData);
+
+    // const form = inputRefs.current.reduce((acc, curr, index) => {
+    //   acc[curr.name] = curr.value;
+    //   return acc;
+    // }, {});
+    // onSubmit(e, form);
   };
+
   return (
     <>
       <FormStyle key="form">
-        <form key={"form"} onSubmit={(e) => onSubmitHandler(e)}>
+        <form key={"form"} ref={formRef} onSubmit={(e) => onSubmitHandler(e)}>
           {inputNames.map((name, index) => {
             if (name !== "content") {
               return (

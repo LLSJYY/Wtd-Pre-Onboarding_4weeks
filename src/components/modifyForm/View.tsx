@@ -27,12 +27,20 @@ const FormStyle = styled.div`
 
 const View = ({ ...Vprops }) => {
   const inputRefs = useRef([]);
-  const { comment, onSubmit, onChange } = Vprops;
+  const { comment, onSubmit } = Vprops;
   const inputNames = ["profile_url", "author", "content", "createdAt"];
+  const onSubmitHandler = (e: React.FormEvent) => {
+    e.preventDefault();
+    const form = inputRefs.current.reduce((acc, curr, index) => {
+      acc[curr.name] = curr.value;
+      return acc;
+    }, {});
+    onSubmit(e, form);
+  };
   return (
     <>
       <FormStyle key="form">
-        <form key={"form"} onSubmit={(e) => onSubmit(e)}>
+        <form key={"form"} onSubmit={(e) => onSubmitHandler(e)}>
           {inputNames.map((name, index) => {
             if (name !== "content") {
               return (
@@ -41,9 +49,8 @@ const View = ({ ...Vprops }) => {
                     type="text"
                     name={name}
                     defaultValue={comment[name]}
-                    required
-                    onChange={(e) => onChange(e)}
                     ref={(ref) => (inputRefs.current[index] = ref)}
+                    required
                   />
                   <br />
                 </React.Fragment>
@@ -55,9 +62,8 @@ const View = ({ ...Vprops }) => {
                   <textarea
                     name={name}
                     defaultValue={comment[name]}
-                    required
-                    onChange={(e) => onChange(e)}
                     ref={(ref) => (inputRefs.current[index] = ref)}
+                    required
                   />
                   <br />
                 </React.Fragment>

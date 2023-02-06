@@ -1,6 +1,8 @@
-{ 
+{
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true, 
-    "jsx": "react-jsx"
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react-jsx",
+    "downlevelIteration": true,
+    "lib": ["es2019", "dom", "dom.iterable"]
   }
 }

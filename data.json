@@ -219,22 +219,15 @@
     },
     {
       "profile_url": "https://picsum.photos/id/1/50/50",
-      "author": "https://picsum.photos/id/1/50/50",
-      "content": "https://picsum.photos/id/1/50/50",
-      "createdAt": "https://picsum.photos/id/1/50/50",
+      "author": "asdasdsadad",
+      "content": "asdasd",
+      "createdAt": "asdasd",
       "id": 35
-    },
-    {
-      "profile_url": "https://picsum.photos/id/1/50/50",
-      "author": "abc_1",
-      "content": "hello\n",
-      "createdAt": "2022-03-23",
-      "id": 36
     },
     {
       "profile_url": "https://picsum.photos/id/2/50/50",
       "author": "abc_2",
-      "content": "123123",
+      "content": "123123aasd",
       "createdAt": "2022-03-23",
       "id": 37
     },
@@ -248,7 +241,7 @@
     {
       "profile_url": "https://picsum.photos/id/5/50/50",
       "author": "abc_5",
-      "content": "hello",
+      "content": "hello adfasfsafaf",
       "createdAt": "2022-03-23",
       "id": 40
     }

@@ -8,12 +8,13 @@ const PageList = () => {
   const { data, isLoading, isError } = useGetCommentByPageQuery(pageNumber);
   const dispatch = useDispatch();
   const currentPage = pageNumber;
+
   if (isLoading) {
-    //TODO: loading handling
+    //TODO: loading handling.
     return;
   }
   if (isError) {
-    //TODO: error handling
+    //TODO: error handling.
     return;
   }
   if (data) {
@@ -27,20 +28,25 @@ const PageList = () => {
       totalPage.push(i);
     }
 
-    if (currentPage <= (Math.ceil(pageGroup / 2))) {
+    if (currentPage <= Math.ceil(pageGroup / 2)) {
       pagination = totalPage.slice(0, pageGroup);
-    } else if (currentPage + (Math.ceil(pageGroup / 2)) > pageLength) {
+    } else if (currentPage + Math.ceil(pageGroup / 2) > pageLength) {
       pagination = totalPage.slice(pageLength - pageGroup, pageLength);
     } else {
-      pagination = totalPage.slice(currentPage - (Math.ceil(pageGroup / 2)), currentPage + ((Math.floor(pageGroup / 2))));
+      pagination = totalPage.slice(
+        currentPage - Math.ceil(pageGroup / 2),
+        currentPage + Math.floor(pageGroup / 2)
+      );
     }
     const Vprops = {
-      pageClickHandler: (number) => { dispatch(selectedPageNumber(number)) },
+      pageClickHandler: (number) => {
+        dispatch(selectedPageNumber(number));
+      },
       pagination,
       currentPage,
-    }
+    };
 
     return <View {...Vprops} />;
   }
-}
+};
 export default PageList;

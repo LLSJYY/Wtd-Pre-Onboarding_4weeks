@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { MutableRefObject, useRef } from "react";
+import React, { MutableRefObject, useRef } from "react";
 const FormStyle = styled.div`
   width: 100%;
   height: 100%;
@@ -34,17 +34,35 @@ const View = ({ ...Vprops }) => {
       <FormStyle key="form">
         <form key={"form"} onSubmit={(e) => onSubmit(e)}>
           {inputNames.map((name, index) => {
-            return (
-              <input
-                key={index}
-                type="text"
-                name={name}
-                defaultValue={comment.name}
-                required
-                onChange={(e) => onChange(e)}
-                ref={(ref) => (inputRefs.current[index] = ref)}
-              />
-            );
+            if (name !== "content") {
+              return (
+                <React.Fragment key={index}>
+                  <input
+                    type="text"
+                    name={name}
+                    defaultValue={comment[name]}
+                    required
+                    onChange={(e) => onChange(e)}
+                    ref={(ref) => (inputRefs.current[index] = ref)}
+                  />
+                  <br />
+                </React.Fragment>
+              );
+            }
+            if (name === "content") {
+              return (
+                <React.Fragment key={index}>
+                  <textarea
+                    name={name}
+                    defaultValue={comment[name]}
+                    required
+                    onChange={(e) => onChange(e)}
+                    ref={(ref) => (inputRefs.current[index] = ref)}
+                  />
+                  <br />
+                </React.Fragment>
+              );
+            }
           })}
           <button type="submit">등록</button>
         </form>

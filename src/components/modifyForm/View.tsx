@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { Tcomments } from "../../util/types/types";
-
+import { MutableRefObject, useRef } from "react";
 const FormStyle = styled.div`
   width: 100%;
   height: 100%;
@@ -26,52 +25,32 @@ const FormStyle = styled.div`
   }
 `;
 
-
 const View = ({ ...Vprops }) => {
-  const { comment, onSubmit, ViewRef, onChange } = Vprops;
+  const inputRefs = useRef([]);
+  const { comment, onSubmit, onChange } = Vprops;
+  const inputNames = ["profile_url", "author", "content", "createdAt"];
   return (
     <>
-      <FormStyle key={comment.id}>
-        <form onSubmit={(e) => onSubmit(e,ViewRef)}>
-          <input
-            type="text"
-            name="profile_url"
-            defaultValue={comment.profile_url}
-            required
-            onChange={(e) => onChange(e, ViewRef.current.profile_url)}
-            ref={ref => ViewRef.current.profile_url = ref}
-          />
-          <br />
-          <input
-            type="text"
-            name="author"
-            defaultValue={comment.author}
-            ref={ref => ViewRef.current.author = ref}
-            onChange={(e) => onChange(e, ViewRef.current.author)}
-          />
-          <br />
-          <textarea
-            name="content"
-            defaultValue={comment.content}
-            required
-            ref={ref => ViewRef.current.content = ref}
-            onChange={(e) => onChange(e, ViewRef.current.content)}
-          ></textarea>
-          <br />
-          <input
-            type="text"
-            name="createdAt"
-            defaultValue={comment.createdAt}
-            required
-            ref={ref => ViewRef.current.createdAt = ref}
-            onChange={(e) => onChange(e, ViewRef.current.createdAt)}
-          />
-          <br />
+      <FormStyle key="form">
+        <form key={"form"} onSubmit={(e) => onSubmit(e)}>
+          {inputNames.map((name, index) => {
+            return (
+              <input
+                key={index}
+                type="text"
+                name={name}
+                defaultValue={comment.name}
+                required
+                onChange={(e) => onChange(e)}
+                ref={(ref) => (inputRefs.current[index] = ref)}
+              />
+            );
+          })}
           <button type="submit">등록</button>
         </form>
       </FormStyle>
     </>
   );
-}
+};
 
 export default View;

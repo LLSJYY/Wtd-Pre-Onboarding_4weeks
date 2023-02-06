@@ -5,7 +5,6 @@ interface IButton {
   textAlign: string;
 }
 
-
 const Comment = styled.div`
   padding: 7px 10px;
   text-align: left;
@@ -28,9 +27,9 @@ const Content = styled.div`
 `;
 
 const Button = styled.div<IButton>`
-text-align: ${props => props.textAlign};
-margin: 10px 0;
-  & > a { 
+  text-align: ${(props) => props.textAlign};
+  margin: 10px 0;
+  & > a {
     margin: 0.125rem;
     padding: 0.375rem 0.75rem;
     border-radius: 0.25rem;
@@ -40,24 +39,38 @@ margin: 10px 0;
 `;
 
 interface IProps {
-  comment : Tcomments,
-  modalTrigger : Function
+  comment: Tcomments;
+  modalTrigger: Function;
 }
-const View = ({ ...Vprops } : IProps) => {
+const View = ({ ...Vprops }: IProps) => {
   const { comment, modalTrigger } = Vprops;
- return <>
-    <Comment key={comment.id}>
-      <img src={comment.profile_url} alt="" />{comment.author}
-      <CreatedAt>{comment.createdAt}</CreatedAt>
-      <Content>{comment.content}</Content>
-      <Button textAlign={'right'} >
-        <button onClick={(event) => modalTrigger({ event, commentId: comment.id, mode: '수정' })}>수정</button>
-        <button onClick={(event) => modalTrigger({ event, commentId: comment.id, mode: '삭제' })}>삭제</button>
-      </Button>
-      <hr />
-    </Comment>
-  </>
-}
-
+  return (
+    <>
+      <Comment key={comment.id}>
+        <img src={comment.profile_url} alt="" />
+        {comment.author}
+        <CreatedAt>{comment.createdAt}</CreatedAt>
+        <Content>{comment.content}</Content>
+        <Button textAlign={"right"}>
+          <button
+            onClick={(event) =>
+              modalTrigger({ event, commentId: comment.id, mode: "수정" })
+            }
+          >
+            수정
+          </button>
+          <button
+            onClick={(event) =>
+              modalTrigger({ event, commentId: comment.id, mode: "삭제" })
+            }
+          >
+            삭제
+          </button>
+        </Button>
+        <hr />
+      </Comment>
+    </>
+  );
+};
 
 export default View;

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import React, { useRef } from "react";
+import { Tcomments } from "../../util/types/types";
 const FormStyle = styled.div`
   width: 100%;
   height: 100%;
@@ -37,11 +38,14 @@ const View = ({ ...Vprops }) => {
     // let formData = Object.fromEntries(form);
     // onSubmit(formData);
 
-    const form = inputRefs.current.reduce((acc, curr, index) => {
-      acc[curr.name] = curr.value;
-      curr.value = "";
-      return acc;
-    }, {});
+    const form = inputRefs.current.reduce(
+      (acc: Tcomments, curr: HTMLInputElement) => {
+        acc[curr.name] = curr.value;
+        curr.value = "";
+        return acc;
+      },
+      {}
+    );
     onSubmit(form);
   };
   return (

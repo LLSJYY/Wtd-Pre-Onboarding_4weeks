@@ -101,8 +101,12 @@ src
       
    - 중복된 Modal 로직
      NewForm 과 ModifyForm의 로직이 공통된 사항이 많은데, modify Form의 특정 관심사를 따로 빼낼 수가 없었습니다.  
-     조금 더 고민을 해본다면 , 더 좋은 구조를 만들 수 있을것 같습니다.
-     
+     조금 더 고민을 해본다면 , 더 좋은 구조를 만들 수 있을것 같습니다. (리팩토링 완료)
+    <details>
+    <summary>리팩토링</summary>
+    https://github.com/LLSJYY/Wtd-Pre-Onboarding_4weeks/pull/2#issue-1572174304
+
+</details>
    - query 의 isLoading , isError 등의 비동기 관련 기능과 캐싱기능
      해당 기능에 대한 충분한 숙지가 되지 않아서 사용하지 못했는데, 아쉬웠습니다.
      

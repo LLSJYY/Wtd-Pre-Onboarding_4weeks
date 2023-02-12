@@ -38,7 +38,7 @@ const View = ({ ...Vprops }) => {
     // let formData = Object.fromEntries(form);
     // onSubmit(formData);
 
-    const form = inputRefs.current.reduce(
+    const form: Tcomments = inputRefs.current.reduce(
       (acc: Tcomments, curr: HTMLInputElement) => {
         acc[curr.name] = curr.value;
         curr.value = "";
